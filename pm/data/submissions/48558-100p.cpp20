@@ -1,0 +1,43 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+ifstream fin ("pm.in");
+ofstream fout ("pm.out");
+int v[501];
+int n,k,nr;
+void inmult (int x)
+{
+    int t=0,i=0;
+    while (i<=nr || t>0)
+    {
+        t=t+x*v[i];
+        v[i]=t%10;
+        t=t/10;
+        i++;
+    }
+    if (i>nr) nr=i;
+}
+void impart (int x)
+{
+    int t=0;
+    for (int i=nr-1;i>=0;i--)
+    {
+        t=t*10+v[i];
+        v[i]=t/x;
+        t=t%x;
+    }
+    while (nr>0 && v[nr-1]==0)
+           nr--;
+}
+int main()
+{
+    fin >>n>>k;
+    n++;v[0]=1;nr=1;
+    for (int i=k+1;i<=n;i++)
+         inmult(i);
+    for (int i=1;i<=n-k;i++)
+         impart(i);
+    for (int i=nr-1;i>=0;i--)
+         fout <<v[i];
+    return 0;
+}

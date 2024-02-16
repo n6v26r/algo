@@ -2,32 +2,32 @@
 #include <stdlib.h>
 
 #define MAXSIZE 1000000
-#define min(a,b) ((a)>(b)? (b) : (a))
 
-int n;
 int v[MAXSIZE+1];
-int total[MAXSIZE+1];
+long long save[MAXSIZE+1];
+int n;
 
 int main(){
   FILE *fin, *fout;
   fin=fopen("clasa1.in", "r");
   fscanf(fin, "%d", &n);
-  for(int i=0; i<n; i++){
+  for(int i=0;i<n;i++){
     fscanf(fin, "%d", &v[i]);
   }
   fclose(fin);
-  int maxp=0, minp=0;
-  for(int i=0; i<n; i++){
-    int max = total[i-1];
-    for(int j=min(minp, maxp); j<i; j++){
-      if((j>0?total[j-1]:0)+abs(v[j]-v[i])>max)
-        max = (j>0?total[j-1]:0)+abs(v[j]-v[i]);
-    }
-    total[i] = max;
-    if(v[i]>v[maxp]) maxp=i;
-    if(v[i]<v[minp]) minp=i;
-  }
+  
+  for(int i=1; i<n; i++){
+    long long max = save[i-1];
+    for(int j=0; j<i; j++){
+      if(abs(v[i]-v[j])+(j>0?save[j-1]:0)>max){
+        max = abs(v[i]-v[j])+(j>0?save[j-1]:0);
+      }
+    }  
+    save[i]=max; 
+  } 
+
   fout=fopen("clasa1.out", "w");
-  fprintf(fout, "%d\n", total[n-1]);
+  fprintf(fout, "%lld\n", save[n-1]);
   fclose(fout);
+  return EXIT_SUCCESS;
 }

@@ -1,47 +1,57 @@
-include <iostream>
+#include <iostream>
 #include <fstream>
-#include <unistd.h>
-#define MAXN 200000
-
+#include <math.h>
 using namespace std;
 
-long long aib[MAXN+2], n;
-int v[MAXN+2];
+#define MAXN 200000
 
-void update(int i, long long val){
-  while(i<=n){
-    aib[i]+=val;
-    i+=(i&-i);
-  }
+int v[MAXN];
+long long blocks[1000];
+int blockSize;
+int blockCount;
+
+void update(int i, int val){
+  int ib = i/blockSize;
+  blocks[ib] += val-v[i];
+  v[i] = val;
 }
 
-long long get(int i){
+long long get(int a, int b){
   long long sum = 0;
-  while(i>0){
-    sum+=aib[i];
-    i-=(i&-i);
-  }
+  printf("%d %d\n", a, ceil((float)(a)/blockSize)*blockSize);
+  for(int i=a; i<ceil((float)(a)/blockSize)*blockSize; i++)
+    sum += v[i];
+  for(int i=ceil((float)(a)/blockSize); i<b/blockSize; i++)
+    sum += blocks[i];
+  for(int i=(b/blockSize)*blockSize; i<=b; i++)
+    sum += v[i];
   return sum;
 }
 
 int main(){
-  //ifstream cin("file.in");
-  //ofstream cout("file.out");
-  int k;
+  ifstream cin("file.in");
+  ofstream cout("file.out");
+  int n, k;
   cin>>n>>k;
+
   for(int i=0; i<n; i++){
-    int val;
-    cin>>val;
-    update(i+1, val);
-    v[i+1] = val;
+    cin>>v[i];
   }
+  blockCount = ceil(sqrt(n));
+  blockSize = n/blockCount;
+
+  for(int i=0; i<n; i++){
+    blocks[i/blockSize]+=v[i];
+  }
+
   for(int i=0; i<k; i++){
     int p, a, b;
     cin>>p>>a>>b;
     if(p==1){
-      update(a, b-v[a]);
-      v[a] = b;
+      update(a-1, b);
     }
-    else cout<<get(b)-get(a-1)<<endl;
+    else cout<<get(a-1, b-1)<<endl;
   }
+
   return 0;
+}
