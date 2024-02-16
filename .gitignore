@@ -3,6 +3,8 @@
 *.layout
 *.depend
 *.cbp
+*.in
+*.out
 # generated directories
 bin/
 obj/
