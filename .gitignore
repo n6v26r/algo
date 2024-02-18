@@ -8,3 +8,6 @@
 # generated directories
 bin/
 obj/
+
+# VsCode
+.vscode
