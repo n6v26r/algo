@@ -9,4 +9,6 @@ https://nerdarena.ro
 https://kilonova.ro
 https://pbinfo.ro
 
+This repo is synced across both Windows and Linux machines, so don't trust the executables, build them yourself. 
+
 Have fun!
