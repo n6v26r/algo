@@ -5,9 +5,14 @@
 *.cbp
 *.in
 *.out
+*.ok
 # generated directories
 bin/
 obj/
+#other stuff
+data/
+teste/
+tests/
 
-# VsCode
+
 .vscode
