@@ -4,7 +4,6 @@
 #define MAXSIZE 6000
 #define MAXLEN 20
 
-
 char v[MAXSIZE+1][MAXLEN+1];
 long long give[MAXSIZE+1];
 long long get[MAXSIZE+1];
