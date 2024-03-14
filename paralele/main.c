@@ -1,3 +1,5 @@
+// OJI 2019 8th grade
+// https://www.nerdarena.ro/problema/paralele
 #include <stdio.h>
 #include <ctype.h>
 
@@ -51,7 +53,7 @@ int main(){
   if(t==1) 
     for(int i=0; i<n; i++){
       suml[i]=(i>0?suml[i-1]:0)+lin[i];
-      sum+= lin[i]*(i>0?suml[i-1]:0);
+      sum += lin[i]*(i>0?suml[i-1]:0);
     }
   else 
     for(int i=0; i<m; i++){

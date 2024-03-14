@@ -1,3 +1,5 @@
+// OJI 2014 8th grade
+// https://www.nerdarena.ro/problema/arrows
 #include <stdio.h>
 #include <stdbool.h>
 
