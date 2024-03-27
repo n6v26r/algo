@@ -1,3 +1,4 @@
+// OJI 2023 - 8th grade
 #include <stdio.h>
 #include <string.h>
 

@@ -1,3 +1,5 @@
+// __razv was here
+// OJI 2009 - 8th grade
 #include <stdio.h>
 
 #define MAXM 40001
