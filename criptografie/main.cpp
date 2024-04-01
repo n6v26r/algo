@@ -1,58 +1,47 @@
-#include <iostream>
-#include <bits/stdc++.h>
-#include <string.h>
-using namespace std;
-
+#include <stdio.h>
+#include <string>
 #define MAXN 100001
 
-int x, n, k;
+int p, n, k;
 
-int f[128];
-string v;
+std::string v;
+int frecv[128];
+
+std::string best;
 
 int main(){
-  ifstream fin("criptografie.in");
-  ofstream fout("criptografie.out");
-  fin >> x >> k >>n;
-  fin >> v;
-  int p = 0, u = -1;
-  long long total = 0;
-  int _max = 0;
+  v.resize(MAXN);
+  FILE *fin, *fout;
+  fin = fopen("criptografie.in", "r");
+  fscanf(fin, "%d%d%d\n", &p, &k, &n);
   for(int i=0; i<n; i++){
-    f[v[i]]++;
-    while(f[v[i]]>k && p<=u){
-      f[v[p]]--;
-      p++;
-    }
-    u++;
-    //printf("%d  %d\n", p, u);
-    if(u-p+1>=_max){
-      _max = u-p+1;
-    }
-    total += u-p+1;
+    v[i] = fgetc(fin);
+  }
+  fclose(fin);
+  long long total = 0;
+  int maxlen = 0;
+  int s = 0;
+  int d = 0;
+  frecv[v[0]] = 1;
+  while(s<n){
+    while(d<n && frecv[v[d]]<=k){
+      total += d-s+1;
+      if(d-s+1>maxlen) maxlen = d-s+1, best = v.substr(s, d-s+1);
+      else if(d-s+1==maxlen && v.substr(s, d-s+1)<best) best = v.substr(s, d-s+1);
+      d++;
+      frecv[v[d]]++;
+    } 
+
+    
+   frecv[v[s]]--, s++;
   }
 
-  if(x==2){
-    string a;
-    for(int i=0; i<n; i++){
-      memset(f, 0, sizeof(f));
-      int j;
-      for(j = i; j<n; j++){
-        if(f[v[j]]){
-          break;
-        }
-        f[v[j]]++;
-      }
-      j--;
-      if(j-i+1>a.size()){
-        a=v.substr(i, j-i+1);
-      }
-      else if(j-i+1==a.size() && a>v.substr(i, j-i+1)){
-        a=v.substr(i, j-i+1);
-      }
-    }
-    fout << a;
+  fout = fopen("criptografie.out", "w");
+  if(p==1)fprintf(fout, "%lld\n", total);
+  else {
+    for(int i=0; i<best.size(); i++)
+      fprintf(fout, "%c", best[i]);
+    fprintf(fout, "\n");
   }
-  if(x==1) fout << total << endl;
-  return 0;
+  fclose(fout);
 }
