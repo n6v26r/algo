@@ -1,3 +1,5 @@
+// Ceva ONI, nu mai tin minte anul
+// __razv was here
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
@@ -101,7 +103,6 @@ int getMonth(){
  
 int readDate(){
   int day;fscanf(fin, "%d", &day);
-  //printf("%d\n", day);
   int hour=0; int min=0;
   char c = fgetc(fin);
   while(c==' ') c=fgetc(fin);
@@ -110,7 +111,6 @@ int readDate(){
     month[ms++]=(c<='Z')? 'a'+c-'A' : c;
     c=fgetc(fin);
   }
-  //printf("%s\n", month);
   while(c==' ') c=fgetc(fin);
   while(isdigit(c))
     hour=hour*10+c-'0', c=fgetc(fin);
