@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+// ONI 2017 8th grade 
+// NOTE: NOT fully correct
+>>>>>>> abdbb5b5b4469998341d71fd297f22a83f9bacb1
 #include <stdio.h>
 #include <system_error>
 #include <vector>
@@ -157,4 +162,7 @@ int main(){
   fclose(fout);
   return 0;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> abdbb5b5b4469998341d71fd297f22a83f9bacb1
